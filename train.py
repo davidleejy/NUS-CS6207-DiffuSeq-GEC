@@ -21,8 +21,13 @@ from transformers import set_seed
 import wandb
 
 ### custom your wandb setting here ###
-# os.environ["WANDB_API_KEY"] = ""
-os.environ["WANDB_MODE"] = "offline"
+# if wandb api exists, read key:
+# if os.path.exists("wandb_api_key.txt"):
+#     with open("wandb_api_key.txt", "r") as f:
+#         api_key = f.read().strip()
+#         print("wandb api key:", api_key)
+# os.environ["WANDB_API_KEY"] = ""  
+os.environ["WANDB_MODE"] = "online"    
 
 def create_argparser():
     defaults = dict()

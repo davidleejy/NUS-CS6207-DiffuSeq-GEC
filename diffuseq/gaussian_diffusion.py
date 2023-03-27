@@ -597,7 +597,15 @@ class GaussianDiffusion:
         assert 'input_ids' in model_kwargs
         input_ids_x = model_kwargs.pop('input_ids').to(t.device)
         input_ids_mask = model_kwargs.pop('input_mask').to(t.device)
-        x_start_mean = model.model.module.get_embeds(input_ids_x)
+        # m_dbg = model.model
+        # print(m_dbg)
+        # print(vars(m_dbg))
+        # print(dir(m_dbg))
+        try:
+            x_start_mean = model.model.module.get_embeds(input_ids_x)
+            # x_start_mean = model.model.model.get_embeds(input_ids_x)
+        except AttributeError:
+            x_start_mean = model.model.get_embeds(input_ids_x)
         
         std = _extract_into_tensor(self.sqrt_one_minus_alphas_cumprod,
                                    th.tensor([0]).to(x_start_mean.device),
@@ -610,8 +618,10 @@ class GaussianDiffusion:
             noise = th.randn_like(x_start)
 
         x_t = self.q_sample(x_start, t, noise=noise, mask=input_ids_mask) # reparametrization trick.
-
-        get_logits = model.model.module.get_logits
+        try:
+            get_logits = model.model.module.get_logits
+        except AttributeError:
+            get_logits = model.model.get_logits
 
         terms = {}
 
