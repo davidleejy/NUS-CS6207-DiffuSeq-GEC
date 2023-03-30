@@ -157,6 +157,9 @@ def get_corpus(data_args, seq_len, split='train', loaded_vocab=None):
     elif split == 'test':
         print('### Loading form the TEST set...')
         path = f'{data_args.data_dir}/test.jsonl'
+    elif split == 'valid-small':
+        print('### Loading form the small VALID set...')
+        path = f'{data_args.data_dir}/valid-small.jsonl'
     else:
         assert False, "invalid split for dataset"
 
