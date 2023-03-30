@@ -7,6 +7,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='decoding args.')
     parser.add_argument('--model_dir', type=str, default='', help='path to the folder of diffusion model')
+    parser.add_argument('--model_chkpt', type=str, default='', help='checkpoint of model to use e.g. ema_0.9999_050000')
     parser.add_argument('--seed', type=int, default=101, help='random seed')
     parser.add_argument('--step', type=int, default=2000, help='if less than diffusion training steps, like 1000, use ddim sampling')
 
@@ -28,6 +29,11 @@ if __name__ == '__main__':
     for lst in glob.glob(args.model_dir):
         print(lst)
         checkpoints = sorted(glob.glob(f"{lst}/{args.pattern}*.pt"))[::-1]
+        
+        if args.model_chkpt != '':
+            checkpoints = [c for c in checkpoints if args.model_chkpt in c]
+        
+        print(f"{checkpoints=}")
 
         out_dir = 'generation_outputs'
         if not os.path.isdir(out_dir):
