@@ -8,7 +8,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --master_port=12233 --use_
 --hidden_dim 2 \
 --bsz 2 \
 --dataset qqp \
---data_dir {path-to-datasets} \
+--data_dir datasets/CommonsenseConversation \
 --vocab bert \
 --seq_len 128 \
 --schedule_sampler lossaware \

@@ -1,0 +1,15 @@
+python -m torch.distributed.launch --nproc_per_node=1 --master_port=12202 --use_env run_train.py \
+--diff_steps 2000 \
+--lr 0.0001 \
+--learning_steps 140000 \
+--save_interval 10000 \
+--seed 102 \
+--noise_schedule sqrt \
+--hidden_dim 128 \
+--bsz 512 \
+--dataset gec \
+--data_dir "datasets/GEC-9MB/corr2err" \
+--vocab bert \
+--seq_len 128 \
+--schedule_sampler lossaware \
+--notes gec_corr2err
