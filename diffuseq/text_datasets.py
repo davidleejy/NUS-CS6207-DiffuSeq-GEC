@@ -160,6 +160,15 @@ def get_corpus(data_args, seq_len, split='train', loaded_vocab=None):
     elif split == 'valid-small':
         print('### Loading form the small VALID set...')
         path = f'{data_args.data_dir}/valid-small.jsonl'
+    elif split == 'test-bea2019-dev':
+        print('### Loading form the BEA2019 dev set...')
+        path = f'{data_args.data_dir}/{split}.jsonl'
+    elif split == 'test-bea2019-sharedtask':
+        print('### Loading form the BEA2019 shared task test set...')
+        path = f'{data_args.data_dir}/{split}.jsonl'
+    elif split == 'test-conll2014':
+        print('### Loading form the conll2014 test set...')
+        path = f'{data_args.data_dir}/{split}.jsonl'
     else:
         assert False, "invalid split for dataset"
 
