@@ -3,6 +3,6 @@ python -u run_decode.py \
 --model_chkpt ema_0.9999_040000 \
 --seed 123 \
 --split test-conll2014 \
---bsz 50 \
+--bsz 25 \
 --step 2000
 
