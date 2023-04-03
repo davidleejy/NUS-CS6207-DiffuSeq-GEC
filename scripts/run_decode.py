@@ -25,9 +25,13 @@ if __name__ == '__main__':
     dname = os.path.dirname(dname)
     os.chdir(dname)
 
+    # print(args.model_dir)
+    # print(glob.glob(args.model_dir))
+    # print(glob.glob('diffusion_models/diffu*'))
+
     output_lst = []
     for lst in glob.glob(args.model_dir):
-        print(lst)
+        print(f'{lst=}')
         checkpoints = sorted(glob.glob(f"{lst}/{args.pattern}*.pt"))[::-1]
         
         if args.model_chkpt != '':
